@@ -6,6 +6,7 @@ import com.workintech.twitterApi.dto.TweetRequest;
 import com.workintech.twitterApi.dto.TweetResponse;
 import com.workintech.twitterApi.entity.Tweet;
 import com.workintech.twitterApi.service.TweetService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,7 @@ public class RetweetController {
     }
 
     @PostMapping
-    public TweetResponse saveRetweet(@RequestBody RetweetRequest retweetRequest){
+    public TweetResponse saveRetweet(@Valid @RequestBody RetweetRequest retweetRequest){
         Tweet savedRetweet = tweetService.retweet(retweetRequest.getTweetId(), retweetRequest.getUserId());
         return tweetConverter.toResponse(savedRetweet);
     }

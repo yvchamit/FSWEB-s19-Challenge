@@ -1,5 +1,4 @@
 package com.workintech.twitterApi.converter;
-
 import com.workintech.twitterApi.dto.CommentRequest;
 import com.workintech.twitterApi.dto.CommentResponse;
 import com.workintech.twitterApi.dto.UserResponse;

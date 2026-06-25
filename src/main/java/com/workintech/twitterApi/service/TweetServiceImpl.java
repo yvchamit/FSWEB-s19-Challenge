@@ -1,8 +1,10 @@
 package com.workintech.twitterApi.service;
 import com.workintech.twitterApi.entity.Tweet;
 import com.workintech.twitterApi.entity.User;
+import com.workintech.twitterApi.exceptions.TweetException;
 import com.workintech.twitterApi.repository.TweetRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -33,7 +35,7 @@ public class TweetServiceImpl implements TweetService{
     public Tweet findById(Long id) {
         Optional<Tweet> optTweet = tweetRepo.findById(id);
 
-        return optTweet.orElseThrow(() -> new RuntimeException("Tweet not found with the given ID: " + id));
+        return optTweet.orElseThrow(() -> new TweetException("Tweet not found with id: " + id, HttpStatus.NOT_FOUND));
     }
 
     @Override

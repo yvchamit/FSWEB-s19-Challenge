@@ -4,6 +4,7 @@ import com.workintech.twitterApi.dto.TweetRequest;
 import com.workintech.twitterApi.dto.TweetResponse;
 import com.workintech.twitterApi.entity.Tweet;
 import com.workintech.twitterApi.service.TweetService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class TweetController {
     private TweetConverter tweetConverter;
 
     @PostMapping
-    public TweetResponse saveTweet(@RequestBody TweetRequest tweetRequest) {
+    public TweetResponse saveTweet(@Valid @RequestBody TweetRequest tweetRequest) {
 
         Tweet saved = tweetService.saveTweet(tweetConverter.toEntity(tweetRequest));
         return tweetConverter.toResponse(saved);
@@ -52,7 +53,7 @@ public class TweetController {
     }
 
     @PutMapping("/{updateId}")
-    public TweetResponse updateTweet(@PathVariable Long updateId, @RequestBody TweetRequest tweetRequest) {
+    public TweetResponse updateTweet(@PathVariable Long updateId,@Valid @RequestBody TweetRequest tweetRequest) {
         Tweet updateTweet = tweetService.updateTweet(updateId, tweetConverter.toEntity(tweetRequest));
         return tweetConverter.toResponse(updateTweet);
     }

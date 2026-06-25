@@ -1,7 +1,9 @@
 package com.workintech.twitterApi.service;
 import com.workintech.twitterApi.entity.Comment;
+import com.workintech.twitterApi.exceptions.CommentException;
 import com.workintech.twitterApi.repository.CommentRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
@@ -17,7 +19,7 @@ public class CommentServiceImpl implements CommentService{
     public Comment findById(Long id) {
         Optional<Comment> optionalComment = commentRepo.findById(id);
 
-        return optionalComment.orElseThrow(()-> new RuntimeException("Comment not found with the given ID: " + id));
+        return optionalComment.orElseThrow(()-> new CommentException("Comment not found with id: " + id, HttpStatus.NOT_FOUND));
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.workintech.twitterApi.entity.Like;
 import com.workintech.twitterApi.service.LikeService;
 import com.workintech.twitterApi.service.TweetService;
 import com.workintech.twitterApi.service.UserService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +22,7 @@ public class LikeController {
     private final TweetService tweetService;
 
     @PostMapping
-    public ResponseEntity<String> like(@RequestBody LikeRequest likeRequest) {
+    public ResponseEntity<String> like(@Valid @RequestBody LikeRequest likeRequest) {
         Like like = new Like();
         like.setUser(userService.findById(likeRequest.getUserId()));
         like.setTweet(tweetService.findById(likeRequest.getTweetId()));
